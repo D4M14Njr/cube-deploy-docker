@@ -3,10 +3,40 @@ version: '2.2'
 services:
   cube:
     image: cubejs/cube
+    container_name: cube
     ports:
       - 3000:3000
       - 4000:4000
+    depends_on:
+      - postgres-cube
+    restart: always
     environment:
       - CUBEJS_DEV_MODE=true
+      - CUBEJS_DB_TYPE=postgres
+      - CUBEJS_DB_HOST=postgres-cube
+      - CUBEJS_DB_NAME=cube
+      - CUBEJS_DB_USER=cube
+      - CUBEJS_DB_PASS=123123
     volumes:
       - .:/cube/conf
+    networks:
+      - cube-network
+  
+  postgres-cube:
+    image: postgres:13.3
+    container_name: postgres-cube
+    restart: always
+    environment:
+      - POSTGRES_DB=cube
+      - POSTGRES_USER=cube
+      - POSTGRES_PASSWORD=123123
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - cube-network
+
+networks:
+  cube-network:
+    name: cube-network
