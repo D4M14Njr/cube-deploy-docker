@@ -1,0 +1,12 @@
+version: '2.2'
+
+services:
+  cube:
+    image: cubejs/cube
+    ports:
+      - 3000:3000
+      - 4000:4000
+    environment:
+      - CUBEJS_DEV_MODE=true
+    volumes:
+      - .:/cube/conf
