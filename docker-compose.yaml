@@ -1,5 +1,3 @@
-version: '2.2'
-
 services:
   cube:
     image: cubejs/cube
@@ -18,7 +16,7 @@ services:
       - CUBEJS_DB_USER=cube
       - CUBEJS_DB_PASS=123123
     volumes:
-      - .:/cube/conf
+      - ./cube-conf:/cube/conf
     networks:
       - cube-network
   
@@ -31,9 +29,7 @@ services:
       - POSTGRES_USER=cube
       - POSTGRES_PASSWORD=123123
     volumes:
-      - .:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
+      - ./postgres-conf:/docker-entrypoint-initdb.d
     networks:
       - cube-network
 
