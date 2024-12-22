@@ -1,4 +1,4 @@
-use cube;
+\c cube
 
 -- Таблица работников
 CREATE TABLE Workers (
