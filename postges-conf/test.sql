@@ -1,3 +1,5 @@
+use cube;
+
 -- Таблица работников
 CREATE TABLE Workers (
     id SERIAL PRIMARY KEY,
